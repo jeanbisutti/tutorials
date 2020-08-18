@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.quickperf.spring.junit4.QuickPerfSpringRunner;
+import org.quickperf.sql.annotation.DisplaySql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -33,8 +35,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * @see DealerResource
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = DealerappApp.class)
+@RunWith(QuickPerfSpringRunner.class)
+@SpringBootTest(classes = {DealerappApp.class, QuickPerfConfig.class})
 public class DealerResourceIntegrationTest {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
@@ -92,6 +94,7 @@ public class DealerResourceIntegrationTest {
 
     @Test
     @Transactional
+    @DisplaySql
     public void createDealer() throws Exception {
         int databaseSizeBeforeCreate = dealerRepository.findAll().size();
 
