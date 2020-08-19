@@ -3,6 +3,8 @@ package com.stackify.test;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.quickperf.spring.junit4.QuickPerfSpringRunner;
+import org.quickperf.sql.annotation.DisplaySql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -18,8 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.stackify.Application;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@RunWith(QuickPerfSpringRunner.class)
+@SpringBootTest(classes = {Application.class, QuickPerfConfig.class})
 @WebAppConfiguration
 public class EmployeeControllerUnitTest {
 
@@ -36,6 +38,7 @@ public class EmployeeControllerUnitTest {
     }
 
     @Test
+    @DisplaySql
     public void whenCreateGetEmployee_thenOk() throws Exception {
         String employeeJson = "{\"name\":\"john\"}";
 
