@@ -1,11 +1,14 @@
 package com.baeldung.repository;
 
+import com.baeldung.QuickPerfConfig;
 import com.baeldung.boot.config.H2JpaConfig;
 import com.baeldung.model.User;
 import com.baeldung.repository.UserRepository;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.quickperf.spring.junit4.QuickPerfSpringRunner;
+import org.quickperf.sql.annotation.DisplaySqlOfTestMethodBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -19,8 +22,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by adam.
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = H2JpaConfig.class)
+@RunWith(QuickPerfSpringRunner.class)
+@SpringBootTest(classes = {H2JpaConfig.class, QuickPerfConfig.class})
+@DisplaySqlOfTestMethodBody
 public class UserRepositoryIntegrationTest {
 
     private final String USER_NAME_ADAM = "Adam";
