@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.quickperf.spring.junit4.QuickPerfSpringRunner;
+import org.quickperf.sql.annotation.DisplaySqlOfTestMethodBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -33,8 +35,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * @see CarResource
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = CarappApp.class)
+@RunWith(QuickPerfSpringRunner.class)
+@SpringBootTest(classes = {CarappApp.class, QuickPerfConfig.class})
 public class CarResourceIntegrationTest {
 
     private static final String DEFAULT_MAKE = "AAAAAAAAAA";
@@ -96,6 +98,7 @@ public class CarResourceIntegrationTest {
 
     @Test
     @Transactional
+    @DisplaySqlOfTestMethodBody
     public void createCar() throws Exception {
         int databaseSizeBeforeCreate = carRepository.findAll().size();
 
