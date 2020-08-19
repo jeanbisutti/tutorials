@@ -1,6 +1,7 @@
 package com.baeldung.vavr.repositories;
 
 import com.baeldung.Application;
+import com.baeldung.QuickPerfConfig;
 import com.baeldung.repositories.VavrUserRepository;
 import com.baeldung.vavr.User;
 import io.vavr.collection.Seq;
@@ -8,6 +9,8 @@ import io.vavr.control.Option;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.quickperf.spring.junit4.QuickPerfSpringRunner;
+import org.quickperf.sql.annotation.DisplaySql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -16,8 +19,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@RunWith(QuickPerfSpringRunner.class)
+@SpringBootTest(classes = {Application.class, QuickPerfConfig.class})
 public class VavrRepositoryIntegrationTest {
 
     @Autowired
@@ -35,6 +38,7 @@ public class VavrRepositoryIntegrationTest {
     }
 
     @Test
+    @DisplaySql
     public void whenAddUsers_thenGetUsers() {
         Option<User> user = userRepository.findById(1L);
         assertFalse(user.isEmpty());
