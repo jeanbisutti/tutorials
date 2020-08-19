@@ -1,6 +1,7 @@
 package com.baeldung.jhipster5.service;
 
 import com.baeldung.jhipster5.BookstoreApp;
+import com.baeldung.jhipster5.QuickPerfConfig;
 import com.baeldung.jhipster5.config.Constants;
 import com.baeldung.jhipster5.domain.User;
 import com.baeldung.jhipster5.repository.UserRepository;
@@ -12,6 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.quickperf.spring.junit4.QuickPerfSpringRunner;
+import org.quickperf.sql.annotation.DisplaySqlOfTestMethodBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.auditing.AuditingHandler;
@@ -35,8 +38,8 @@ import static org.mockito.Mockito.when;
  *
  * @see UserService
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = BookstoreApp.class)
+@RunWith(QuickPerfSpringRunner.class)
+@SpringBootTest(classes = { BookstoreApp.class, QuickPerfConfig.class})
 @Transactional
 public class UserServiceIntegrationTest {
 
@@ -71,6 +74,7 @@ public class UserServiceIntegrationTest {
     }
 
     @Test
+    @DisplaySqlOfTestMethodBody
     @Transactional
     public void assertThatUserMustExistToResetPassword() {
         userRepository.saveAndFlush(user);

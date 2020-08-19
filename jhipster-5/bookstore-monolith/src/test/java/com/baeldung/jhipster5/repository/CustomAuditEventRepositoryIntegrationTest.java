@@ -1,12 +1,17 @@
 package com.baeldung.jhipster5.repository;
 
 import com.baeldung.jhipster5.BookstoreApp;
+import com.baeldung.jhipster5.QuickPerfConfig;
 import com.baeldung.jhipster5.config.Constants;
 import com.baeldung.jhipster5.config.audit.AuditEventConverter;
 import com.baeldung.jhipster5.domain.PersistentAuditEvent;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.quickperf.config.library.QuickPerfConfigs;
+import org.quickperf.spring.junit4.QuickPerfSpringRunner;
+import org.quickperf.sql.annotation.DisplaySql;
+import org.quickperf.sql.annotation.DisplaySqlOfTestMethodBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,8 +35,9 @@ import static com.baeldung.jhipster5.repository.CustomAuditEventRepository.EVENT
  *
  * @see CustomAuditEventRepository
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = BookstoreApp.class)
+@RunWith(QuickPerfSpringRunner.class)
+@SpringBootTest(classes = {BookstoreApp.class, QuickPerfConfig.class})
+@DisplaySqlOfTestMethodBody
 @Transactional
 public class CustomAuditEventRepositoryIntegrationTest {
 
