@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see CarResource
  */
 @RunWith(QuickPerfSpringRunner.class)
-@SpringBootTest(classes = {CarappApp.class, QuickPerfConfig.class})
+@SpringBootTest(classes = CarappApp.class)
 public class CarResourceIntegrationTest {
 
     private static final String DEFAULT_MAKE = "AAAAAAAAAA";
